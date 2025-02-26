@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -49,7 +50,6 @@ export const createUserDocumentFromAuth = async (
 
   // Check if user exists and access data
   const userSnapshot = await getDoc(userDocRef);
-
   // If user data does not exist
   // create/set the document with the data from userAuth in my collection
   if (!userSnapshot.exists()) {
@@ -86,3 +86,7 @@ export const signInAuthWithEmailAndPassword = async (email, password) => {
 
 // Sign out a user
 export const signOutUser = async () => await signOut(auth);
+
+// Listen for changes in auth - sign in/sign out
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
