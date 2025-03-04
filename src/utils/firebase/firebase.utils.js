@@ -10,7 +10,16 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 // Web app's Firebase configuration
 const firebaseConfig = {
@@ -39,6 +48,41 @@ export const signInWithGoogleRedirect = () =>
 
 // Database
 export const db = getFirestore();
+
+// Add collection and documents to firestore
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  // Create a reference to the collection
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    // Add a new document with a generated id
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+  // Commit the batch
+  await batch.commit();
+  console.log("done");
+};
+
+// Get categories and documents from firestore
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  // generate a query
+  const q = query(collectionRef);
+  // get the data from the query
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
+};
 
 // Create a user document from auth
 export const createUserDocumentFromAuth = async (
