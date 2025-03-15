@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./user/user.reducer";
-
-export const rootReducer = combineReducers({
-  user: userReducer,
-});
+import { categoriesReducer } from "./categories/categories.reducer";
 
 // dispatch actions
 // get the values out of the store into application
+export const rootReducer = combineReducers({
+  user: userReducer,
+  categories: categoriesReducer,
+});

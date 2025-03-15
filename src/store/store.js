@@ -3,10 +3,10 @@ import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
 
 const middleWares = [logger];
-const composeEnhancers = compose(applyMiddleware(...middleWares));
+const composedEnhancers = compose(applyMiddleware(...middleWares));
 
 export const store = legacy_createStore(
   rootReducer,
   undefined,
-  composeEnhancers
+  composedEnhancers
 );
