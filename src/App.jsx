@@ -25,7 +25,7 @@ const App = () => {
     });
 
     return unsubscribe;
-  }, [dispatch]);
+  }, [dispatch]); // dispatch is not going to change
 
   return (
     <Routes>

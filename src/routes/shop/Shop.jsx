@@ -19,7 +19,7 @@ const Shop = () => {
       dispatch(setCategories(categoriesArray));
     };
     getCategoriesMap();
-  }, [dispatch]);
+  }, [dispatch]); // dispatch is not going to change
 
   return (
     <Routes>
