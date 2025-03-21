@@ -106,8 +106,8 @@ export const createUserDocumentFromAuth = async (
     }
   }
 
-  // If user exists return userDocRef
-  return userDocRef;
+  // If user exists return user data
+  return userSnapshot;
 };
 
 // Create a user
@@ -128,3 +128,17 @@ export const signOutUser = async () => await signOut(auth);
 // Listen for changes in auth - sign in/sign out
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+// check if an active user that is authenticated
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
