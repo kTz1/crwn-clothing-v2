@@ -10,7 +10,7 @@ import Navigation from "./routes/navigation/Navigation";
 import Authentication from "./routes/authentication/Authentication";
 import Shop from "./routes/shop/Shop";
 import Checkout from "./routes/checkout/Checkout";
-import { setCurrentUser } from "./store/user/user.action";
+import { setCurrentUser } from "./store/user/user.reducer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const App = () => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
+      console.log(setCurrentUser(user));
       dispatch(setCurrentUser(user));
     });
 
