@@ -10,7 +10,7 @@ import { rootSaga } from "./root-saga";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["cart"],
+  blacklist: ["user"],
 };
 
 // saga middleware
