@@ -1,13 +1,20 @@
-/* eslint-disable no-undef */
+require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-export async function handler(event) {
+exports.handler = async (event) => {
   try {
+    console.log("Event body:", event.body);
+
     const { amount } = JSON.parse(event.body);
+
+    if (!amount || typeof amount !== "number" || amount <= 0) {
+      throw new Error(
+        "Invalid amount provided. Amount must be a positive integer."
+      );
+    }
 
     console.log(`Creating payment intent for amount: ${amount}`);
 
-    // Create a payment intent with the specified amount
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
@@ -18,14 +25,22 @@ export async function handler(event) {
 
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
       body: JSON.stringify({ paymentIntent }),
     };
   } catch (error) {
-    console.log({ error });
+    console.error("Error creating payment intent:", error.message, error.stack);
 
     return {
       statusCode: 400,
-      body: JSON.stringify({ error }),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+      body: JSON.stringify({ error: error.message }),
     };
   }
-}
+};
