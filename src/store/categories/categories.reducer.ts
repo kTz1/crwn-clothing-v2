@@ -1,5 +1,10 @@
-import { CATEGORIES_ACTION_TYPES, Category } from "./categories.types";
-import { CategoryAction } from "./categories.action";
+import { AnyAction } from "redux-saga";
+import { Category } from "./categories.types";
+import {
+  fetchCategoriesStart,
+  fetchCategoriesSuccess,
+  fetchCategoriesFailed,
+} from "./categories.action";
 
 // type that represents the state of categories
 export type CategoryState = {
@@ -15,21 +20,23 @@ export const CATEGORIES_INITIAL_STATE: CategoryState = {
 };
 
 // reducer function that takes the current state and an action as arguments
-// it returns a new state based on the action type and payload
+// and returns a new state based on the action type
+// it uses a matchable pattern to check the action type and update the state accordingly
 export const categoriesReducer = (
   state = CATEGORIES_INITIAL_STATE,
-  action = {} as CategoryAction
-) => {
-  const { type } = action;
-
-  switch (action.type) {
-    case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START:
-      return { ...state, isLoading: true };
-    case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
-      return { ...state, categories: action.payload, isLoading: false };
-    case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED:
-      return { ...state, error: action.payload, isLoading: false };
-    default:
-      return state;
+  action = {} as AnyAction
+): CategoryState => {
+  if (fetchCategoriesStart.match(action)) {
+    return { ...state, isLoading: true };
   }
+
+  if (fetchCategoriesSuccess.match(action)) {
+    return { ...state, categories: action.payload, isLoading: false };
+  }
+
+  if (fetchCategoriesFailed.match(action)) {
+    return { ...state, error: action.payload, isLoading: false };
+  }
+
+  return state;
 };
