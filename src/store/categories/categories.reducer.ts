@@ -24,7 +24,7 @@ export const CATEGORIES_INITIAL_STATE: CategoryState = {
 // it uses a matchable pattern to check the action type and update the state accordingly
 export const categoriesReducer = (
   state = CATEGORIES_INITIAL_STATE,
-  action = {} as AnyAction
+  action: AnyAction
 ): CategoryState => {
   if (fetchCategoriesStart.match(action)) {
     return { ...state, isLoading: true };
