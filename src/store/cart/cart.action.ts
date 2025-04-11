@@ -75,6 +75,7 @@ export const setIsCartOpen = withMatcher(
     createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, boolean)
 );
 
+// set cart items
 export const setCartItems = withMatcher(
   (cartItems: CartItem[]): SetCartItems =>
     createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)

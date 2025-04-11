@@ -56,11 +56,11 @@ export type SignOutFailed = ActionWithPayload<
   Error
 >;
 
+// *Matchable action creators
 export const checkUserSession = withMatcher(
   (): CheckUserSession => createAction(USER_ACTION_TYPES.CHECK_USER_SESSION)
 );
 
-// action creator to set the current user
 export const setCurrentUser = withMatcher(
   (user: UserData): SetCurrentUser =>
     createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user)

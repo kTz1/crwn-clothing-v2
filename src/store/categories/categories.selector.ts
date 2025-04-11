@@ -1,12 +1,14 @@
 import { createSelector } from "reselect";
 import { CategoryState } from "./categories.reducer";
 import { CategoryMap } from "./categories.types";
+import { RootState } from "../store";
 
 // selector that takes the state as an argument and returns the categories slice of the state
 // it is used to access the categories state in a more readable way
 // it is a pure function that does not modify the state
 // it is used to create memoized selectors that can improve performance
-const selectCategoryReducer = (state): CategoryState => state.categories;
+const selectCategoryReducer = (state: RootState): CategoryState =>
+  state.categories;
 
 // memoization selector optimization
 export const selectCategories = createSelector(

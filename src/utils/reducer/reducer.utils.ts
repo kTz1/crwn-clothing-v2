@@ -19,7 +19,6 @@ export function withMatcher<AC extends () => AnyAction & { type: string }>(
 
 // this overload is for when the action creator takes arguments
 // it takes an action creator function that takes any number of arguments and returns an action with a type property
-// and returns a new function that has the same properties as the action creator
 // but also has a type property that is the return type of the action creator
 // and a match function that takes an action as an argument and returns a boolean indicating whether the action matches the type of the action creator
 export function withMatcher<
