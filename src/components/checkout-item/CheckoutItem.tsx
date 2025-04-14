@@ -8,7 +8,17 @@ import {
 } from "../../store/cart/cart.action";
 import "./checkout-item.styles.scss";
 
-const CheckoutItem = ({ cartItem }) => {
+type CartItemProps = {
+  cartItem: {
+    id: number;
+    name: string;
+    imageUrl: string;
+    price: number;
+    quantity: number;
+  };
+};
+
+const CheckoutItem = ({ cartItem }: CartItemProps) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();

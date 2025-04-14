@@ -3,7 +3,17 @@ import { Link } from "react-router";
 import ProductCard from "../product-card/ProductCard";
 import "./category-preview.styles.scss";
 
-const CategoryPreview = ({ title, products }) => {
+type CategoryPreviewProps = {
+  title: string;
+  products: Array<{
+    id: number;
+    name: string;
+    imageUrl: string;
+    price: number;
+  }>;
+};
+
+const CategoryPreview = ({ title, products }: CategoryPreviewProps) => {
   return (
     <div className="category-preview-container">
       <h2>
