@@ -1,26 +1,37 @@
+import { FC } from "react";
 import "./spinner.styles.scss";
 
-const SPINNER_TYPES_CLASSES = {
-  spinner: "default",
-  btnSpinner: "small",
-} as const;
-
-type SpinnerType = keyof typeof SPINNER_TYPES_CLASSES;
-
-interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
-  spinnerType?: SpinnerType;
+export enum SPINNER_TYPES_CLASSES {
+  spinner = "default",
+  btnSpinner = "small",
 }
 
-const Spinner: React.FC<SpinnerProps> = ({
-  spinnerType = "spinner",
+const getSpinner = (spinnerType = SPINNER_TYPES_CLASSES.spinner) =>
+  ({
+    [SPINNER_TYPES_CLASSES.spinner]: "default",
+    [SPINNER_TYPES_CLASSES.btnSpinner]: "small",
+  }[spinnerType]);
+
+export type SpinnerProps = {
+  spinnerType?: SPINNER_TYPES_CLASSES;
+  isLoading?: boolean;
+  children?: React.ReactNode;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+const Spinner: FC<SpinnerProps> = ({
+  spinnerType = SPINNER_TYPES_CLASSES.spinner,
+  isLoading = false,
+  children,
   ...otherProps
-}) => (
-  <div className="spinner-overlay">
-    <div
-      className={`spinner-container ${SPINNER_TYPES_CLASSES[spinnerType]}`}
-      {...otherProps}
-    ></div>
-  </div>
-);
+}) => {
+  const CustomSpinner = getSpinner(spinnerType);
+  return (
+    <div className="spinner-overlay">
+      <div className={`spinner-container ${CustomSpinner}`} {...otherProps}>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export default Spinner;

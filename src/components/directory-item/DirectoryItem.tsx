@@ -1,8 +1,15 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router";
 import "./directory-item.styles.scss";
-const DirectoryItem = ({ category }) => {
-  const { title, imageUrl, route } = category;
+import { DirectoryCategory } from "../directory/Directory";
+import { FC } from "react";
+
+type DirectoryItemProps = {
+  category: DirectoryCategory;
+};
+
+const DirectoryItem: FC<DirectoryItemProps> = ({ category }) => {
+  const { imageUrl, title, route } = category;
   const navigate = useNavigate();
 
   const onNavigateHandler = () => navigate(route);

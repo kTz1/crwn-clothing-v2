@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { FC, ButtonHTMLAttributes } from "react";
-import Spinner from "../spinner/Spinner";
+import Spinner, { SPINNER_TYPES_CLASSES } from "../spinner/Spinner";
 import "./button.styles.scss";
 
 export enum BUTTON_TYPES_CLASSES {
@@ -27,7 +27,7 @@ const Button: FC<ButtonProps> = ({
   children,
   buttonType,
   isLoading,
-  spinnerType = "btnSpinner",
+  spinnerType,
   ...otherProps
 }) => {
   const CustomButton = getButton(buttonType);
@@ -37,7 +37,11 @@ const Button: FC<ButtonProps> = ({
       disabled={isLoading}
       {...otherProps}
     >
-      {isLoading ? <Spinner spinnerType={spinnerType} /> : children}
+      {isLoading ? (
+        <Spinner spinnerType={SPINNER_TYPES_CLASSES.btnSpinner} />
+      ) : (
+        children
+      )}
     </button>
   );
 };
