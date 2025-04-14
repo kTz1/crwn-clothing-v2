@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
 import {
@@ -6,19 +7,14 @@ import {
   clearItemFromCart,
   removeItemFromCart,
 } from "../../store/cart/cart.action";
+import { CartItem } from "../../store/cart/cart.types";
 import "./checkout-item.styles.scss";
 
-type CartItemProps = {
-  cartItem: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
-    quantity: number;
-  };
+type CheckoutItemProps = {
+  cartItem: CartItem;
 };
 
-const CheckoutItem = ({ cartItem }: CartItemProps) => {
+const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();

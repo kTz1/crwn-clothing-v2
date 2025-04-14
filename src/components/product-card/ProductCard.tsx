@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
 import { addItemToCart } from "../../store/cart/cart.action";
 import Button, { BUTTON_TYPES_CLASSES } from "../button/Button";
 import { CategoryItem } from "../../store/categories/categories.types";
 import "./product-card.styles.scss";
-import { FC } from "react";
 
 type ProductCardProps = {
   product: CategoryItem;

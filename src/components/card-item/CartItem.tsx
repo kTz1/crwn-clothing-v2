@@ -1,17 +1,13 @@
 /* eslint-disable react/prop-types */
+import { FC } from "react";
+import { CartItem as TCartItem } from "../../store/cart/cart.types";
 import "./cart-item.styles.scss";
 
 type CartItemProps = {
-  cartItem: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
-    quantity: number;
-  };
+  cartItem: TCartItem;
 };
 
-const CartItem = ({ cartItem }: CartItemProps) => {
+const CartItem: FC<CartItemProps> = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
     <div className="cart-item-container">
