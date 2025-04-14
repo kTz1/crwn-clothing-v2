@@ -1,7 +1,17 @@
 /* eslint-disable react/prop-types */
 import "./cart-item.styles.scss";
 
-const CartItem = ({ cartItem }) => {
+type CartItemProps = {
+  cartItem: {
+    id: number;
+    name: string;
+    imageUrl: string;
+    price: number;
+    quantity: number;
+  };
+};
+
+const CartItem = ({ cartItem }: CartItemProps) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
     <div className="cart-item-container">

@@ -1,11 +1,20 @@
-import PropTypes from "prop-types";
 import "./spinner.styles.scss";
 
 const SPINNER_TYPES_CLASSES = {
   spinner: "default",
   btnSpinner: "small",
-};
-const Spinner = ({ spinnerType = "spinner", ...otherProps }) => (
+} as const;
+
+type SpinnerType = keyof typeof SPINNER_TYPES_CLASSES;
+
+interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
+  spinnerType?: SpinnerType;
+}
+
+const Spinner: React.FC<SpinnerProps> = ({
+  spinnerType = "spinner",
+  ...otherProps
+}) => (
   <div className="spinner-overlay">
     <div
       className={`spinner-container ${SPINNER_TYPES_CLASSES[spinnerType]}`}
@@ -13,9 +22,5 @@ const Spinner = ({ spinnerType = "spinner", ...otherProps }) => (
     ></div>
   </div>
 );
-
-Spinner.propTypes = {
-  spinnerType: PropTypes.oneOf(Object.keys(SPINNER_TYPES_CLASSES)),
-};
 
 export default Spinner;
