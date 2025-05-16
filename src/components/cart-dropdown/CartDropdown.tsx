@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Button from "../button/Button";
@@ -9,9 +10,10 @@ const CardDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
-  const goToCheckoutHandler = () => {
+  const goToCheckoutHandler = useCallback(() => {
     navigate("/checkout");
-  };
+  }, []);
+
   return (
     <div className="cart-dropdown-container">
       <div className="cart-items">
