@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router";
 import ProductCard from "../product-card/ProductCard";
-import "./category-preview.styles.scss";
 import { CategoryItem } from "../../store/categories/categories.types";
 import { FC } from "react";
+import "./category-preview.styles.scss";
 
 type CategoryPreviewProps = {
   title: string;

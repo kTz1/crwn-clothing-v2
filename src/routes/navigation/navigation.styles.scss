@@ -10,6 +10,11 @@
     width: 70px;
     padding: 25px;
     cursor: pointer;
+
+    @media screen and (max-width: 800px) {
+      width: 50px;
+      padding: 0px;
+    }
   }
 
   .nav-links-container {
@@ -23,5 +28,15 @@
       padding: 10px 15px;
       cursor: pointer;
     }
+
+    @media screen and (max-width: 800px) {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 60px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
   }
 }
